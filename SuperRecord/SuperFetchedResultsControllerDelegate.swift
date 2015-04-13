@@ -156,7 +156,7 @@ class SuperFetchedResultsControllerDelegate : NSObject, NSFetchedResultsControll
             objectChanges.append(changeDictionary)
         }
     }
-
+ 
     func controllerDidChangeContent(controller: NSFetchedResultsController!)
     {
         if(receiverType() == ReusableViewType.TableView){

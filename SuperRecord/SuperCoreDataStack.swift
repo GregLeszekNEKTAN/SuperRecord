@@ -15,7 +15,9 @@ import UIKit
 import CoreData
 
 let infoDictionary = NSBundle.mainBundle().infoDictionary as NSDictionary?
-let stackName = infoDictionary!["CFBundleName"] as! String
+//let stackName = infoDictionary!["CFBundleName"] as! String
+let stackName = "ChompCasino"
+
 let storeName = stackName + ".sqlite"
 
 let applicationDocumentsDirectory: NSURL = {
@@ -36,12 +38,14 @@ public class SuperCoreDataStack: NSObject {
         return DefaultStatic.instance
     }
     
-    public class var inMemoryStack : SuperCoreDataStack {
-        struct InMemoryStatic {
-            static let instance : SuperCoreDataStack = SuperCoreDataStack(storeType:NSInMemoryStoreType,storeURL:nil)
-        }
-        return InMemoryStatic.instance
-    }
+//    public class var inMemoryStack : SuperCoreDataStack {
+//        struct InMemoryStatic {
+//            static let instance : SuperCoreDataStack = SuperCoreDataStack(storeType:NSInMemoryStoreType,storeURL:nil)
+//        }
+//        return InMemoryStatic.instance
+//    }
+//    
+    public static let inMemoryStack = SuperCoreDataStack(storeType:NSInMemoryStoreType,storeURL:nil)
     
     init(storeType: NSString, storeURL: NSURL?) {
         self.persistentStoreURL = storeURL
@@ -85,7 +89,7 @@ public class SuperCoreDataStack: NSObject {
         return coordinator
         }()
     
-    lazy var managedObjectContext: NSManagedObjectContext? = {
+    public lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         if coordinator == nil {
